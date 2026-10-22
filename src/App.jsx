@@ -1,16 +1,24 @@
+import {useState} from "react";
+
 function App() {
-  /* return 문의 최상단 부모 태그(컴포넌트)는 무조건 1개만 있어야 함 */
+  // useState() 리액트 훅
+  // react가 이 컴포넌트가 화면에 떠 있는 동안 유지하며 감시하는 특수 변수를 만들어내는 훅
+  // 매개변수로서 useState(초기값)
+  // 그렇게 해서 array를 리턴하는데 그 모양은 [state변수, state변수를 바꿀 수 있는 함수]
+  const [count, setCount] = useState(0);
 
-  let a = "홍길동";
-  let b = 18;
+  // 사용자가 버튼을 클릭하는 순간, count에 현재값+1 하는 계산을 시켜야 됨
 
-  return <>
-    {/* 자바스크립트를 실행한 결과물을 리턴에 포함시키겠다 => 값이 나와야 함 */}
-    {/* 문은 불가능 함 => if문, for문, 함수 선언문, 변수 선언문, etc */}
-    {/* 계산을 시켜서 변수에 저장하는 할당문도 불가능 */}
-    <div>{a}님의 나이는 {b}이며, 내년에는 {b+1}살이 됩니다.</div>
-    <div>{a}님은 {b > 20 ? "성인" : "아이"}입니다</div>
-  </>;
+  function addCount() {
+    setCount(count + 1);
+    // 리턴이 필요없음. 왜?
+    // count의 값을 이 함수는 바꿔줄 것이고,
+    // count는 state이므로, 값만 바뀌면 리액트가 알아서 화면을 다시 그릴거니까.
+  }
+
+  // 어떠한 태그든지, onClick이라는 속성을 사용할 수 있고
+  // 말 그대로 "이 태그가 클릭되는 순간" 집어넣은 함수가 실행됨
+  return <button onClick={addCount}>지금 현재 count state의 값은 {count}입니다</button>;
 }
 
 export default App;
